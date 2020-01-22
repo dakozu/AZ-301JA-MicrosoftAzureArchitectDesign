@@ -93,13 +93,15 @@ lab:
     ```sh
     az appservice plan create --is-linux --name "AADesignLab0502-$LOCATION" --resource-group $RESOURCE_GROUP_APP --location $LOCATION --sku B2
     ```
-
+    
+    > **注記**: コマンドが失敗し、*Linux ワーカーは、リソース グループ AADesignLab0502-RG では利用できません。*というメッセージが表示される場合。*詳細については、https://go.microsoft.com/fwlink/?linkid=831180"をご覧ください。*リソース グループを削除し、**ロケーション** を **eastus** に設定し、前の 2 つの手順を再実行します。
+    
 #### タスク 4: Web App インスタンスの作成
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Linux ベースの App Service Web アプリ インスタンスで実行時間の可能性のある一覧を表示します: 
 
     ```sh
-    az webapp list-runtimes --linux
+    az webapp list-runtimes --linux --output tsv
     ``` 
 
 2. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、新しい Web アプリの名前として使用するランダムに生成された文字列である新しい変数を作成します:

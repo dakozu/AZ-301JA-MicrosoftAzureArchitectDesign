@@ -46,11 +46,11 @@ lab:
 
 1. Azure Portal の左上隅にある **リソースの作成** をクリックします。
 
-1. **新規** ブレードの上部にある **マーケットプレイスの検索** テキスト ボックスに **「Windows Server 2016」** と入力し、**Enter** を押します。
+1. **「新規」** ブレードの上部の **「マーケットプレースの検索」** テキスト ボックスで、 **「Windows Server」** と入力し、**Enter** キーを押します。
 
-1. **すべて**のブレードで、検索結果で **Windows Server 2016 データセンター** をクリックします。
+1. [**すべて**] のブレードで、検索結果から [**Windows Server**] をクリックします。
 
-1. **Windows Server 2016 データセンター** ブレードで、**作成** ボタンをクリックします。
+1. **Windows Server** ブレードで、**[smalldisk] Windows Server 2016 Datacenter** ソフトウェア プランを選択し、[**作成**] ボタンをクリックします。
 
 1. **基本** タブで、次のタスクを実行します。
 
@@ -232,7 +232,7 @@ lab:
 1. 表示される **BLOB プロパティ** ポップアップで、**URL** プロパティの値を見つけて記録します。この URL は、この演習の後半で使用されます。
 
 
-#### タスク 6: Aure ポータルから PowerShell DSC 拡張機能を用いて Azure リソース マネージャー テンプレートを使用して Azure VM をデプロイします。
+#### タスク 6: Azure portal から PowerShell DSC 拡張機能を用いて Azure Resource Manager テンプレートを使用して Azure VM をデプロイします。
 
 1. Azure Portal の左上隅にある **リソースの作成** をクリックします。
 
@@ -367,7 +367,7 @@ lab:
 
 1. **テンプレートを編集** ブレードで、**ファイルを読み込む** をクリックします。
 
-1. 表示される **開く** ファイル ダイアログで、**F:\\Labfiles\\Mod03\\Starter** フォルダに移動します。
+1. 表示される ファイルを **開く** ダイアログで、**\\allfiles\\AZ-301T04\\Module_02\\LabFiles\\Starter\\*** フォルダに移動します。
 
 1. **vmss-template.json** ファイルを選択します。
 
@@ -437,7 +437,7 @@ lab:
 
     - **Cloud Shell リージョン** ドロップダウン リストで、この演習でリソースをデプロイする Azure リージョンの一致またはロケーションの近くを選択します。
 
-    - **リソース グループ** セクションで、**新規作成** オプションが選択されていることを確認し、テキストボックスに **AADesignLab0303-RG** と入力します。
+    - [**リソース グループ**] セクションで [**新規作成**] オプションが選択されていることを確認し、[**AADesignLab0301-RG**] を選択します。
 
     - **ストレージ アカウント** セクションで、**新規作成** オプションが選択されていることを確認し、下のテキスト ボックスに、3 - 24の小文字および数字の組み合わせで構成される一意の名前を入力します。
 
@@ -510,7 +510,7 @@ lab:
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** を押して、この演習で前に作成したリソース グループの名前を指定する変数を作成します。
@@ -525,6 +525,11 @@ lab:
     LOCATION=$(az group list --query "[?name == 'AADesignLab0301-RG'].location" --output tsv)
     ```
 
+1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、展開に使用するリソース グループを作成します:
+
+    ```sh
+    az group create --name $RESOURCE_GROUP --location $LOCATION
+    ```
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** を押して **adminUsername** パラメーターのプレースホルダを、Building Blocks パラメーター ファイルの値 **Student** に置き換えます。
 
     ```sh
@@ -604,7 +609,7 @@ lab:
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** を押して、デプロイに使用するリソース グループの名前を指定する変数を作成します。

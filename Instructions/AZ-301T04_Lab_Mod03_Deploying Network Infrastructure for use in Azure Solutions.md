@@ -1,4 +1,4 @@
----
+﻿---
 lab:
     title: 'Azure ソリューションで使用するネットワーク インフラストラクチャのデプロイ'
     module: 'モジュール 3: Azure アプリケーション コンポーネントのネットワーク'
@@ -113,11 +113,11 @@ lab:
     > **注記**: 有効にするには、Buliding Blocks npm パッケージをインストールするために Cloud Shell を再起動する必要があります。
 
 
-#### タスク 3: Building Blocks ハブ アンド スポーク パラメーター ファイル を準備します。
+#### タスク 4: Building Blocks ハブ アンド スポーク パラメーター ファイル を準備します。
 
 1. **Cloud Shell** ペインで、**ファイルのアップロード/ダウンロード** アイコンをクリックし、ドロップダウン メニューで **アップロード** をクリックします。 
 
-1. **開く** のダイアログ ボックスで、**\\allfiles\\AZ-301T04\\Module_03\\LabFiles\\Starter\\** フォルダに移動し、**hub-nva.json**、**hub-vnet.json**、 **hub-vnet-peering.json**、 **spoke1.json** および **spoke2.json** ファイルを選択し、**開く** をクリックします。 
+1. **Open** ダイアログ ボックスで、**\\allfiles\\AZ-301T04\\Module_03\\LabFiles\\Starter\\** フォルダーにアクセスし、**hub-nva.json** を選択し、**Open** をクリックします。同様の手順を繰り返し、ファイル **hub-vnet.json**、**hub-vnet-peering.json**、**spoke1.json**、**spoke2.json** をアップロードします。
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンド **Enter**、**adminUsername** パラメーターのプレースホルダを **hub-vnet.json** Building Blocks パラメーター ファイルの値 **Student** に置き換えます。
 
@@ -191,12 +191,12 @@ lab:
     cat ~/spoke2.json
     ```
 
-#### タスク 4: ハブ アンド スポーク設計 のハブ コンポーネントを実装します。
+#### タスク 5: ハブ アンド スポーク設計 のハブ コンポーネントを実装します。
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、ハブ仮想ネットワークを含むリソース グループの名前を指定する変数を作成します。
@@ -210,6 +210,12 @@ lab:
     ```sh
     LOCATION='<Azure region>'
     ```
+1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、展開用のリソース グループを作成します。
+
+    ```sh
+    az group create --name $RESOURCE_GROUP_HUB_VNET --location $LOCATION
+    ```
+
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure Building Blocks を使用してハブ アンド スポーク トポロジのハブ コンポーネントをデプロイします。
 
@@ -220,7 +226,7 @@ lab:
 1. デプロイが完了するのを待たずに、次のタスクに進みます。
 
 
-#### タスク 5: ハブ とスポーク 設計 のスポーク コンポーネントを実装します。
+#### タスク 6: ハブ とスポーク 設計 のスポーク コンポーネントを実装します。
 
 1. タスク バーで、**Microsoft Edge** アイコンをクリックします。
 
@@ -233,7 +239,7 @@ lab:
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、最初のスポーク仮想ネットワークを含むリソース グループの名前を指定する変数を作成します。
@@ -246,6 +252,11 @@ lab:
 
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
+    ```
+1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、展開用のリソース グループを作成します。:
+
+    ```sh
+    az group create --name $RESOURCE_GROUP_SPOKE1_VNET --location $LOCATION
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure Building Blocks を使用してハブ アンド スポーク トポロジの最初のスポーク コンポーネントをデプロイします。
@@ -267,7 +278,7 @@ lab:
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、2 番目のスポーク仮想ネットワークを含むリソース グループの名前を指定する変数を作成します。
@@ -281,6 +292,11 @@ lab:
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
     ```
+1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、展開用のリソース グループを作成します。:
+
+    ```sh
+    az group create --name $RESOURCE_GROUP_SPOKE2_VNET --location $LOCATION
+    ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure Building Blocks を使用してハブ アンド スポーク トポロジの 2 番目のスポーク コンポーネントをデプロイします。
 
@@ -290,7 +306,7 @@ lab:
 
 1. デプロイが完了するのを待たずに、次のタスクに進みます。
 
-#### タスク 6: ハブとスポークの設計 の VNet ピアリングを構成します。
+#### タスク 7: ハブとスポークの設計 の VNet ピアリングを構成します。
 
 1. タスク バーで、**Microsoft Edge** アイコンをクリックします。
 
@@ -303,7 +319,7 @@ lab:
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、ハブ仮想ネットワークを含むリソース グループの名前を指定する変数を作成します。
@@ -327,7 +343,7 @@ lab:
 1. デプロイが完了するのを待たずに、次のタスクに進みます。
 
 
-#### タスク 7: ハブとスポーク設計 のルーティングを構成します。
+#### タスク 8: ハブとスポーク設計 のルーティングを構成します。
 
 1. タスク バーで、**Microsoft Edge** アイコンをクリックします。
 
@@ -340,7 +356,7 @@ lab:
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure サブスクリプションの名前を指定する変数を作成します。
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、ルーターとしてハブ ネットワーク 仮想 アプライアンス (NVA) 機能を含むリソース グループの名前を指定する変数を作成します。
@@ -354,7 +370,12 @@ lab:
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
     ```
+1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、展開で使用されるリソース グループを作成します。
 
+    ```sh
+    az group create --name $RESOURCE_GROUP_HUB_NVA --location $LOCATION
+    ```
+    
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** を押して、Azure Building Blocks を使用してハブ アンド スポーク トポロジの NVA コンポーネントをデプロイします。
 
     ```sh
@@ -425,15 +446,13 @@ lab:
 
     - **仮想マシン** ドロップダウン リストで、デフォルトのエントリのままにします。
 
-    - **ポート** テキスト ボックスは空白のままにします。 
-
     - **宛先** オプションが　**手動で指定**　に設定されていることを確認します。
 
     - **URI、FQDN、または IPv4** テキスト ボックスに **「10.2.0.68」** エントリを入力します。
 
-    -  **ポート** テキストに「3389」と入力します。 
+    - **宛先ポート** テキストに「3389」と入力します。 
 
-    - チェック** ボタンをクリックします。
+    - **チェック** ボタンをクリックします。
 
 1. 接続チェックの結果が返されるまで待ち、ステータスが **到達可能** であることを確認します。
 

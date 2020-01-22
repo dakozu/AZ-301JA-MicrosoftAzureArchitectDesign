@@ -268,40 +268,40 @@ lab:
 
 1. ポータルの下部にある  **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押し、NPM を使用して **azure** パッケージをインストールします。   
 
-    ```sh 
-	npm install azure
-    ```
+```sh
+npm install azure
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して対話型ノード　ターミナルを開きます。   
 
-    ```sh
+```sh
     node
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押してノードの **「azure」** モジュールをインポートします。   
 
-    ```sh
+```sh
     var azure = require('azure');
-    ```
+```
     > **注記** 出力には **未定義** が表示されます。これは予測されていることです。。
     
 1. **Cloud Shell** コマンド プロンプトで、次のコマンド (プレースホルダ `<Service Bus namespace connection string>`をこの演習で前に記録した URL の値に置き換える) を入力し、 **Enter** キーを押して新しい変数を作成します。
 
-    ```sh
+```sh
     var connectionString = '<Service Bus namespace connection string>';
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、Service Bus 名前空間に接続する新しいクライアントを作成します。   
 
-    ```sh
+```sh
     var serviceBusService = azure.createServiceBusService(connectionString);
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、クライアントを使用して Service Bus 名前空間キューにメッセージを送信します。   
 
-    ```sh
+```sh
     serviceBusService.sendQueueMessage('messages', { body: 'Hello World' }, function(error) { console.log(error) });    
-    ```
+```
 
 1. Azure Portal のハブ メニューで、**リソース グループ** をクリックします。
 
@@ -325,9 +325,9 @@ lab:
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、この実習ラボで作成したすべてのリソース グループを一覧表示します。   
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab11')]".name --output tsv
-    ```
+```
 
 1. 出力に、この実習ラボで作成したリソース グループのみが含まれていることを確認します。これらのグループは、次のタスクで削除されます。
 
@@ -335,9 +335,9 @@ lab:
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押してこの実習ラボで作成したリソース グループを削除します。
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab11')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. ポータルの下部にある **Cloud Shell** プロンプトを閉じます。 
 

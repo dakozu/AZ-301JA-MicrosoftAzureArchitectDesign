@@ -76,7 +76,7 @@ lab:
 
 1. 「**開く**」 ダイアログボックスで、**\\allfiles\\AZ-301T02\\Module_03\\LabFiles\\Starter\\** フォルダーに移動して、**linux-template.json** ファイルを選択し、「**開く**」 をクリックします。このファイルには、次のテンプレートが含まれています。
 
-    ```json
+```json
     {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -104,7 +104,7 @@ lab:
         },
         "resources": [
             {
-                "apiVersion": "2017/06/01",
+                "apiVersion": "2017-06-01",
                 "type": "Microsoft.Network/publicIPAddresses",
                 "name": "[variables('publicIPAddressName')]",
                 "location": "[resourceGroup().location]",
@@ -113,7 +113,7 @@ lab:
                 }
             },
             {
-                "apiVersion": "2017/06/01",
+                "apiVersion": "2017-06-01",
                 "type": "Microsoft.Network/virtualNetworks",
                 "name": "[variables('virtualNetworkName')]",
                 "location": "[resourceGroup().location]",
@@ -134,7 +134,7 @@ lab:
                 }
             },
             {
-                "apiVersion": "2017/10/01",
+                "apiVersion": "2017-10-01",
                 "type": "Microsoft.Network/networkInterfaces",
                 "name": "[variables('nicName')]",
                 "location": "[resourceGroup().location]",
@@ -160,7 +160,7 @@ lab:
                 }
             },
             {
-                "apiVersion": "2017/03/30",
+                "apiVersion": "2017-03-30",
                 "type": "Microsoft.Compute/virtualMachines",
                 "name": "[variables('vmName')]",
                 "location": "[resourceGroup().location]",
@@ -193,31 +193,31 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. 「Cloud Shell」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、ハブ仮想ネットワークが含まれるリソース グループの名前を指定する変数を作成します。
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab1202-RG'
-    ```
+```
 
 1. 「**Cloud Shell**」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、デプロイに使用する Azure リージョンを指定する変数を作成します (プレースホルダー `<Azure リージョン>` を、このラボでリソースをデプロイする Azure リージョンの名前に置き換えます)。
 
-    ```sh
+```sh
     LOCATION='<Azure region>'
-    ```
+```
 
 1. 「**Cloud Shell**」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、新しいリソース グループを作成します。
 
-    ```sh
+```sh
     az group create --name $RESOURCE_GROUP --location $LOCATION
-    ```
+```
 
 1. 「**Cloud Shell**」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、指定したパラメーター ファイルを使用して Azure Resource Manager テンプレートをデプロイします。
 
-    ```sh
+```sh
     az group deployment create --resource-group $RESOURCE_GROUP --template-file ~/linux-template.json --parameters password=Pa55w.rd1234
-    ```
+```
 
 1. デプロイが完了するのを待たずに、次のタスクに進みます。
 
@@ -290,7 +290,7 @@ lab:
 
     - 「**構成ファイル**」 フィールドの横にある、フォルダー アイコンのある青いボタンをクリックします。
 
-    - 「**アップロードするファイルを選択**」 ダイアログボックスで、**\\allfiles\\AZ-301T02\\Module_02\\LabFiles\\Starter\\** フォルダーに移動します。
+    - 「**アップロードするファイルを選択**」 ダイアログボックスで、**\\allfiles\\AZ-301T02\\Module_03\\LabFiles\\Starter\\** フォルダーに移動します。
 
     - **lampserver.ps1** ファイルを選択します。
 
@@ -357,9 +357,9 @@ lab:
 
 1. ポータルの下部にある 「Cloud Shell」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、このラボで作成したすべてのリソース グループを一覧表示します。
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab12')]".name --output tsv
-    ```
+```
 
 1. このラボで作成したリソース グループのみが出力に含まれていることを確認します。これらのグループは、次のタスクで削除されます。
 
@@ -367,9 +367,9 @@ lab:
 
 1. 「Cloud Shell」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、このラボで作成したリソース グループを削除します。
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab12')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. ポータルの下部にある 「Cloud Shell」 プロンプトを閉じます。
 

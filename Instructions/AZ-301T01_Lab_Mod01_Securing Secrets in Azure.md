@@ -124,39 +124,39 @@ lab:
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、この演習の前半でデプロイした Azure Key Vaultが含まれているリソース グループの名前を指定する変数を作成します。
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、この演習の前半で作成したAzure Key Vaultの名前を取得します。
 
-    ```sh
+```sh
     KEY_VAULT_NAME=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].name" --output tsv)
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押してKey Vaultのシークレットを一覧表示します。
 
-    ```sh
-    az keyvault secret list --vault-name $KEY_VAULT_NAME
-    ```
+```sh
+    az keyvault secret list --vault-name $KEY_VAULT_NAME --output json
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、 **Enter** キーを押して、 **thirdPartyKey** シークレットの値が表示します。
 
-    ```sh
+```sh
     az keyvault secret show --vault-name $KEY_VAULT_NAME --name thirdPartyKey --query value --output tsv
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押してKey Vaultに新しいシークレットを追加します。
 
-    ```sh
+```sh
     az keyvault secret set --vault-name $KEY_VAULT_NAME --name firstPartyKey --value 56f8a55119845511c81de488
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押してKey Vaultのシークレットを一覧表示します。
 
-    ```sh
+```sh
     az keyvault secret list --vault-name $KEY_VAULT_NAME --query "[*].{Id:id,Created:attributes.created}" --out table
-    ```
+```
 
 1. **Cloud Shell** ペインを閉じます。
 
@@ -176,7 +176,7 @@ lab:
 
 1. **アップロードするファイルを選択** ダイアログ ボックスで、**\\allfiles\\AZ-301T01\\Module_01\\LabFiles\\Starter\\** フォルダーに移動して、**secret-template.json** ファイルを選択し、**開く** をクリックします。これにより、テンプレート エディタ ペインに次のコンテンツが読み込まれます。
 
-    ```json
+```json
     {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -200,7 +200,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. **保存** ボタンをクリックしてテンプレートを保持します。
 
@@ -232,7 +232,7 @@ lab:
 
 1. 「**アップロードするファイルを選択**」 ダイアログ ボックスで、**\\allfiles\\AZ-301T01\\Module_01\\LabFiles\\Starter\\** フォルダーに移動して、**storage-template.json** ファイルを選択し、「**開く**」 をクリックします。これにより、テンプレート エディタ ペインに次のコンテンツが読み込まれます。
 
-    ```json
+```json
     {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -272,7 +272,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. **保存** ボタンをクリックしてテンプレートを保持します。
 
@@ -321,21 +321,21 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押して、ハブ仮想ネットワークが含まれるリソースグループの名前を指定する変数を作成します。
 
-    ```
+```
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キー を押して、この演習の前半で作成した Azure Key Vaultリソース ID を取得します。
 
-    ```sh
+```sh
     KEY_VAULT_ID=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].id" --output tsv)
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure Key Vaultリソース ID の名前を指定し、リソース ID に含まれる特殊文字を考慮する変数を作成します。
 
-    ```sh
+```sh
     KEY_VAULT_ID_REGEX="$(echo $KEY_VAULT_ID | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')"
-    ```
+```
 
 #### タスク 2: Azure Resource Managerのデプロイ テンプレートとパラメーター ファイルを準備する
 
@@ -349,15 +349,15 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押して、 **vm-template.parameters.json** パラメーターファイルの **$KEY_VAULT_ID**パラメーターのプレースホルダーを **$KEY_VAULT_ID** 変数の値に置き換えます。        
 
-    ```sh
+```sh
     sed -i.bak1 's/"$KEY_VAULT_ID"/"'"$KEY_VAULT_ID_REGEX"'"/' ~/vm-template.parameters.json
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter**キーを押して、パラメーターファイルでプレースホルダーが正常に置き換えられたことを確認します。
 
-    ```sh
+```sh
     cat ~/vm-template.parameters.json
-    ```
+```
 
 #### タスク 3: Azure Resource Manager テンプレートをデプロイするためのKey Vaultを設定する
 
@@ -369,9 +369,7 @@ lab:
 
 1. 「Key Vault」 ブレードで、「**アクセス ポリシー**」 をクリックします。
 
-1. **アクセス ポリシー** ブレードで、**クリックして高度なアクセスポリシーを表示** リンクをクリックします。
-
-1. **テンプレートをデプロイするためにAzure Resource Managerへのアクセスを有効にする**チェックボックスを選択します。
+1. [**アクセス ポリシー**] ブレードの [**次へのアクセスを有効にする:**] 領域で、[**Template deployment 用の Azure Resource Manager**] チェックボックスを選択します。
 
 1. ペインの上部にある **保存** ボタンをクリックします。
 
@@ -379,9 +377,9 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter**キーを押して、指定したパラメーターファイルを使用してAzure Resource Managerテンプレートをデプロイします。
 
-    ```sh
+```sh
     az group deployment create --resource-group $RESOURCE_GROUP --template-file ~/vm-template.json --parameters @~/vm-template.parameters.json
-    ```
+```
 
 1. デプロイが完了するのを待ってから、次のタスクに進みます。
 
@@ -389,33 +387,33 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter**キーを押して、新しくデプロイされたAzure VMが含まれているリソースグループの名前を指定する変数を作成します。
 
-    ```
+```
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押して、ローカル管理者アカウントのパスワードの値を保存するシークレットを含んでいる Azure Key Vault名前を取得します。
 
-    ```sh
+```sh
     KEY_VAULT_NAME=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].name" --output tsv)
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter**キーを押してシークレットの値を取得します。
 
-    ```sh
+```sh
     az keyvault secret show --vault-name $KEY_VAULT_NAME --name vmPassword --query value --output tsv
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押して、前のタスクでデプロイした Azure VM のパブリック IP アドレスを取得します。
 
-    ```sh
+```sh
     PUBLIC_IP=$(az network public-ip list --resource-group $RESOURCE_GROUP --query "[0].ipAddress" --output tsv)
-    ```
+```
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押してSSH 経由でAzure VMに接続します。
 
-    ```sh
+```sh
     ssh Student@$PUBLIC_IP
-    ```
+```
 
 1. **Cloud Shell** コマンド プロンプトで、接続を続行するかどうかを確認するメッセージが表示された場合は、`はい`と入力し、**Enter** キーを押します。
 
@@ -435,9 +433,9 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter**キーを押して、このラボで作成したすべてのリソースグループを一覧表示します。
 
-    ```
+```
     az group list --query "[?starts_with(name,'AADesignLab09')]".name --output tsv
-    ```
+```
 
 1. このラボで作成したリソース グループのみが出力に含まれていることを確認します。これらのグループは、次のタスクで削除されます。
 
@@ -445,9 +443,9 @@ lab:
 
 1. **Cloud Shell** コマンドプロンプトで、次のコマンドを入力し、**Enter** キーを押してこのラボで作成したリソースグループを削除します。
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab09')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. Portalの下部にある **Cloud Shell** プロンプトを閉じます。
 

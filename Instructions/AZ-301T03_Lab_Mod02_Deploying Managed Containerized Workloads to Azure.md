@@ -76,7 +76,7 @@ lab:
     RESOURCE_GROUP='AADesignLab0402-RG'
     ```
 
-2. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、デプロイに使用する Azure リージョンを指定する変数を作成します (プレースホルダを `<Azure region>` このラボでリソースをデプロイする Azure リージョンの名前と置き換えます):
+2. 「**Cloud Shell**」 コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、デプロイに使用する Azure リージョンを指定する変数を作成します (プレースホルダー `<Azure リージョン>` を、このラボでリソースをデプロイする Azure リージョンの名前に置き換えます)。`az account list-locations` は、サブスクリプションで利用可能なすべての場所を一覧表示します。):
 
     ```sh
     LOCATION='<Azure region>'
@@ -169,7 +169,7 @@ lab:
     kubectl get service --watch
     ```
 
-6. **EXTERNAL-IP** 列の **aad0402-akscluster** エントリの値が **<pending>** からパブリック IP アドレス変更されるまで、待ち、**Ctrl-C** キーの組み合わせを押します。 **aad0402-akscluster** の **EXTERNAL-IP** 列のパブリック IP アドレスにご注意ください。 
+6. **aad0402-akscluster** エントリの **EXTERNAL-IP** 列の値が **\<pending\>** からパブリック IP アドレスに変更されるまで待ってから、**Ctrl-C** キーの組み合わせを押します。**aad0402-akscluster** の **EXTERNAL-IP** 列のパブリック IP アドレスにご注意ください。 
 
 7. Microsoft Edge を起動し、前項の操作で取得した IP アドレスを参照します。 Microsoft Edge に **Welcome to nginx!** メッセージが表示されていることを確認します。
 
@@ -286,7 +286,7 @@ lab:
     kubectl get service azure-vote-front --watch
     ```
 
-8. **azure-vote-front** エントリの **EXTERNAL-IP** 列の値が、**<pending>** からパブリック IP アドレスに変更されるまで待ち、 **Ctrl-C** キーの組み合わせを押します。 **azure-vote-front**の **EXTERNAL-IP** 列のパブリック IP アドレスにご注意ください。 
+8. **azure-vote-front** エントリの **EXTERNAL-IP** 列の値が **\<pending\>** からパブリック IP アドレスに変更されるまで待ってから、**Ctrl-C** キーの組み合わせを押します。**azure-vote-fron** の **EXTERNAL-IP** 列のパブリック IP アドレスにご注意ください。  
 
 9. Microsoft Edge を起動し、前項の操作で取得した IP アドレスを参照します。 Microsoft Edge の Web ページに **Azure Voting App** メッセージが表示されていることを確認します。
 
@@ -404,7 +404,7 @@ lab:
 7. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、サンプル ソリューション内のサービスとリソースの認証用の Azure Active Directory サービス プリンシパルを作成します:
 
     ```sh
-    SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --name AADesignLab0403-SP)
+    SERVICE_PRINCIPAL=$(az ad sp create-for-rbac --name AADesignLab0403-SP --output json)
     ```
 
 8. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、新しく作成されたサービス プリンシパルの **appId** 属性を取得します:
@@ -480,7 +480,7 @@ lab:
 17. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、GitHub リポジトリに存在する Azure Resource Managerテンプレートを使用してサンプル ソリューションをデプロイします:
 
     ```sh
-    az group deployment create --resource-group $RESOURCE_GROUP --template-uri https://raw.githubusercontent.com/cjpluta/AZ-301-MicrosoftAzureArchitectDesign/master/allfiles/AZ-301T03/Module_02/LabFiles/Starter/azuredeploy.json --parameters @parameters.json
+    az group deployment create --resource-group $RESOURCE_GROUP --template-uri https://raw.githubusercontent.com/MicrosoftLearning/AZ-301-MicrosoftAzureArchitectDesign/master/allfiles/AZ-301T03/Module_02/LabFiles/Starter/azuredeploy.json --parameters ~/parameters.json
     ```
 
 18. 次のタスクに進む前に、デプロイメントが完了するのを待ちます。
@@ -496,7 +496,7 @@ lab:
 
 3. **AADesignLab0403-RG** リソースグループブレードで、リソースのリストを確認し、以下で利用可能な情報と比較します: https://docs.microsoft.com/ja-JP/azure/architecture/example-scenario/apps/devops-with-aks
 
-> **校閲**: このエキササイズでは、Azure Building Blocks を使用して、Windows Server 2016 データセンターと Linux をCloud Shell から実行する Azure VM をデプロイしました。
+> **復習**: この演習では、AKSアーキテクチャを使用して DevOps をデプロイしました。
 
 
 ## エクササイズ 5: ラボ リソースの削除

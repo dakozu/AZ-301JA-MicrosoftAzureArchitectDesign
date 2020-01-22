@@ -58,7 +58,7 @@ lab:
 
 7. **Choose File to Upload** ダイアログ ボックスで、 **\\allfiles\\AZ-301T03\\Module_01\\Labfiles\\Starter\\**フォルダに移動し、**vnet-simple-template.json** ファイルを選択し、**Open**をクリックします。 これにより、テンプレート エディタ ペインに次のコンテンツが読み込まれます:
 
-    ```json
+```json
     {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -125,7 +125,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 8. **保存** ボタンをクリックしてテンプレートを保持します。
 
@@ -186,7 +186,7 @@ lab:
 
     - **Cloud Shell リージョン** ドロップダウン リストで、Azure リージョンの一致を選択するか、このラボでリソースをデプロイした場所の近くに選択します
 
-    - リソース グループ: **新規作成** オプションが選択されていることを確認し、テキスト ボックスで **AADesignLab0202-RG**と入力します。
+    - リソース グループ: [**既存を使用**] オプションが選択されていることを確認し、[**AADesignLab0201-RG**] を選択します。
 
     - **ストレージ アカウント** セクションで、**新規作成** オプションが選択されていることを確認し、下のテキスト ボックスに、3 - 24 文字と数字の組み合わせで構成される一意の名前を入力します。 
 
@@ -201,41 +201,41 @@ lab:
 
 1. ポータルの下部にある **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure Building Blocks npm パッケージをインストールするローカル ディレクトリを作成します:
 
-    ```sh
+```sh
     mkdir ~/.npm-global
-    ```
+```
 
 2. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して npm 構成を更新して、新しいローカル ディレクトリを含めます:
 
-    ```sh
+```sh
     npm config set prefix '~/.npm-global'
-    ```
+```
 
 3. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、~./bashrc 設定ファイルを開いて編集します:
 
-    ```sh
+```sh
     vi ~/.bashrc
-    ```
+```
 
 4. **Cloud Shell** コマンド プロンプトで、vi エディタインターフェイスでファイルの一番下までスク役割し (または **G** と入力)、最後の行の右端の文字 (または **$** と入力)、**a** と入力して **INSERT** モードを入力し、**Enter** キーを押して新しいラインを開始し、新しく作成されたディレクトリをシステム パスに追加するには、次のように入力します:
 
-    ```sh
+```sh
     export PATH="$HOME/.npm-global/bin:$PATH"
-    ```
+```
 
 5. **Cloud Shell** コマンド プロンプトで、vi エディタ インターフェイスで変更内容を保存してファイルを閉じるには、**Esc** キーを押し、**:** を押し、**wq!** と入力し、**Enter** キーを押します。
 
 6. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して Azure Building Blocks npm パッケージをインストールします:
 
-    ```sh
+```sh
     npm install -g @mspnp/azure-building-blocks
-    ```
+```
 
 7. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押してシェルを終了します:
 
-    ```sh
+```sh
     exit
-    ```
+```
 
 8. **Cloud Shell のタイム アウト** ペインで、**再接続** をクリックします。 
 
@@ -246,41 +246,46 @@ lab:
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure Building Blocks テンプレートを含む GitHub リポジトリをダウンロードします:
 
-    ```sh
+```sh
     git clone https://github.com/mspnp/template-building-blocks.git
-    ```
+```
 
 2.  **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、このデプロイに使用する Azure Building Blocks パラメーター ファイルの内容を表示します:
 
-    ```sh
+```sh
     cat ./template-building-blocks/scenarios/vnet/vnet-simple.json 
-    ```
+```
 
 3. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure サブスクリプションの名前を指定する変数を作成します:
 
-    ```sh
+```sh
     SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
-    ```
+```
 
 4. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、このエキササイズで前に作成したリソース グループの名前を指定する変数を作成します:
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab0202-RG'
-    ```
+```
 
 5. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、デプロイに使用する Azure リージョンを指定する変数を作成します:
 
-    ```sh
+```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab0201-RG'].location" --output tsv)
-    ```
+```
 
-6. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure Building Blocksを使用して仮想ネットワークをデプロイします:
+6. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して **AADesignLab0202-RG** リソース グループを作成します:
 
-    ```sh
+```sh
+    az group create --location $LOCATION --name $RESOURCE_GROUP
+```
+7. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、Azure Building Blocksを使用して仮想ネットワークをデプロイします:
+
+```sh
     azbb -g $RESOURCE_GROUP -s $SUBSCRIPTION_ID -l $LOCATION -p ./template-building-blocks/scenarios/vnet/vnet-simple.json --deploy
-    ```
+```
 
-7. 次のタスクに進む前に、デプロイメントが完了するのを待ちます。
+8. 次のタスクに進む前に、デプロイメントが完了するのを待ちます。
 
 
 #### タスク 4: デプロイメント メタデータ を表示します。
@@ -297,7 +302,7 @@ lab:
 
 6. **Cloud Shell** ペインを閉じます。
 
-> **校閲**: このエキササイズでは、Azure Portal の Azure Resource Manager テンプレートを使用して Azure 仮想ネットワークをデプロイしました:
+> **復習**: このエキササイズでは、Cloud Shell の Azure Building Blocks テンプレートを使用して Azure 仮想ネットワークをデプロイしました:Cloud Shell
 
 
 ## エクササイズ 3: ラボ リソースの削除
@@ -308,9 +313,9 @@ lab:
 
 2. ポータルの下部にある **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、このラボで作成したすべてのリソース グループを一覧表示します:
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab02')]".name --output tsv
-    ```
+```
 
 3. 出力に、この実習ラボで作成したリソース グループのみが含まれていることを確認します。 これらのグループは、次のタスクで削除されます。
 
@@ -318,9 +323,9 @@ lab:
 
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、押して、**Enter**このラボで作成したリソース グループを削除します :
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab02')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 2. ポータルの下部にある **Cloud Shell** プロンプトを閉じます。
 
