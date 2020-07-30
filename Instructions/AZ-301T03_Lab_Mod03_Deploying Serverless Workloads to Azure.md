@@ -152,7 +152,7 @@ lab:
 3. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、デプロイメントに使用する Azure リージョンを指定する変数を作成します:
 
     ```sh
-    LOCATION=$(az group list --query "[?name == 'AADesignLab0502-RG'」.location" --output tsv)
+    LOCATION=$(az group list --query "[?name == 'AADesignLab0502-RG'].location" --output tsv)
     ```
 
 4. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、 **Enter** キーを押して、新しい Web アプリの名前として使用するランダムに生成された文字列である新しい変数を作成します:
