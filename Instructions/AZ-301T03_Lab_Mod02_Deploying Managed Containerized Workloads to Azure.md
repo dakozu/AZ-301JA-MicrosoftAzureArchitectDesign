@@ -91,7 +91,7 @@ lab:
 4. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して新AKS クラスターを作成します:
 
     ```sh
-    az aks create --resource-group $RESOURCE_GROUP --name aad0402-akscluster --node-count 1 --node-vm-size Standard_DS1_v2 --generate-ssh-keys
+    az aks create --resource-group $RESOURCE_GROUP --name aad0402-akscluster --node-count 1 --node-vm-size Standard_D2s_v3 --generate-ssh-keys
     ```
 
     > **注記**: `--node-vm-size` パラメーターで表される VM サイズの可用性に関するエラー メッセージが表示された場合は、メッセージを確認し、他のお勧めの VM サイズを試してください。
@@ -104,7 +104,7 @@ lab:
 
     > **注記**: **Restriction** 列には、サブスクリプションで使用できない VM サイズの値 **NotAvailableForSubscription** が含まれます。
 
-    > **注記**: 2019 年 2 月 21 日現在、VM サイズ **Standard_DS2_V2** が **westeurope** 1 で利用可能でした。
+
 
 
 5. 次のタスクに進む前に、デプロイメントが完了するのを待ちます。
