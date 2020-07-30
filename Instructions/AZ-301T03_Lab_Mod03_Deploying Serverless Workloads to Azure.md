@@ -164,7 +164,7 @@ lab:
 5. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押してユニークな名前を使用して新しい Web アプリを作成します:
 
     ```sh
-    az webapp create --name $WEBAPPNAME2 --plan AADesignLab0502-$LOCATION --resource-group $RESOURCE_GROUP_APP --runtime "NODE|9.4"
+    az webapp create --name $WEBAPPNAME2 --plan AADesignLab0502-$LOCATION --resource-group $RESOURCE_GROUP_APP --runtime "NODE|12-lts"
     ```
 
     > **注記**: Web アプリ名の重複が原因でコマンドが失敗した場合は、コマンドが正常に完了するまで、最後の 2 つの操作を再実行します
