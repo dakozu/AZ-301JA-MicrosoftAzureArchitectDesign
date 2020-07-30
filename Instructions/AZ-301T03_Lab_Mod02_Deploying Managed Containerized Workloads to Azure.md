@@ -295,13 +295,14 @@ lab:
 1. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して、サンプルのコンテナ化されたアプリケーションをダウンロードします:
 
     ```
+    cd ..
     git clone https://github.com/kubernetes-incubator/metrics-server.git
     ```
 
 2. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して **Metrics Server** をインストールします:
 
     ```
-    kubectl create -f ~/metrics-server/deploy/1.8+/
+    kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
     ```
 
 3. **Cloud Shell** コマンド プロンプトで、次のコマンドを入力し、**Enter** キーを押して **azure-vote-front** デプロイのオートスケールを設定します:
